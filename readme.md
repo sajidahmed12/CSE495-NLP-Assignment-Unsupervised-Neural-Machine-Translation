@@ -37,15 +37,7 @@ Run `evaluate_model.py` to evaluate the accuracy of the model on both train and 
 * After prediction, we calculate Bleu scores for the predicted sentences to check how well the model generalizes.
 
 ### Calculating the Bleu scores
-**BLEU (bilingual evaluation understudy)** is an algorithm for comparing predicted machine translated text with the reference string given by the human. A high BLEU score means the predicted translated sentence is pretty close to the reference string. More information can be found [here](https://en.wikipedia.org/wiki/BLEU). Below are the BLEU scores for both the training set and the testing set along with the predicted and target English sentence corresponding to the given German source sentence.
-
-On the Training Set:
-
-![Training set Bleu score](https://github.com/vibhor98/Neural-Machine-Translation-using-Keras/blob/master/images/train_bleu.png)
-
-On the Testing Set:
-
-![Testing set Bleu score](https://github.com/vibhor98/Neural-Machine-Translation-using-Keras/blob/master/images/test_bleu.png)
+**BLEU (bilingual evaluation understudy)** is an algorithm for comparing predicted machine translated text with the reference string given by the human. A high BLEU score means the predicted translated sentence is pretty close to the reference string. More information can be found [here](https://en.wikipedia.org/wiki/BLEU). Below are the BLEU scores for both the training set and the testing set along with the predicted and target English sentence corresponding to the given Bangla source sentence.
 
 ### References:
 * [Neural Machine Translation by jointly learning to Align and Translate](https://arxiv.org/pdf/1409.0473v7.pdf)
@@ -90,13 +82,7 @@ as well as environmental issues when running multiple models.
 * The work would have been better if we had unrestrained access to a powerful system for an extensive
 period of 2 weeks so we could test all our models with varying combinations.
 
-## 4. Requirements: 
-				python>=3.5.0
-				numpy>=1.14.0
-				jupyter==1.0.0
-				gensim==3.2.0
-				tqdm==4.19.5
-				torch==0.3.0
+
 #### Please download the trained_model.pt file from the foloowing link https://drive.google.com/file/d/17-RFIitkcnphSQZ_CkxN_203laTO8lVH/view?usp=sharing
 #### -----English To Bangla Translation-----
 
