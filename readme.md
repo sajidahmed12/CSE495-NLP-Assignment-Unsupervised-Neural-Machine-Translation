@@ -43,6 +43,7 @@ period of 2 weeks so we could test all our models with varying combinations.
 				gensim==3.2.0
 				tqdm==4.19.5
 				torch==0.3.0
+Please download the trained_model.pt file from the foloowing link https://drive.google.com/file/d/17-RFIitkcnphSQZ_CkxN_203laTO8lVH/view?usp=sharing
 ## -----English To Bangla Translation-----
 
 python3 translate.py -s data/eng_test.txt -sl e -t out_ben.txt
