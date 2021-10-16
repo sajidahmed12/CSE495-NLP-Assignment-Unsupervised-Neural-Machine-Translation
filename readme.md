@@ -1,47 +1,105 @@
-# Neural-Machine-Translation-v Bangla-To English
+# Neural Machine Translation Bangla To English
 
-This is the sequential Encoder-Decoder implementation of Neural Machine Translation using Keras-Tensorflow. This model translates the input Bangla sentence into the corresponding English sentence and vice verca with a **Bleu Score: 0.409124** on the test set.
+* state-of-the-art multilingual word embeddings ([fastText](https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md) embeddings aligned in a common space)
+* large-scale high-quality bilingual dictionaries for training and evaluation
 
-**Encoder** - Represents the input text corpus (Bangla text) in the form of embedding vectors and trains the model.
+We include two methods, one *supervised* that uses a bilingual dictionary or identical character strings, and one *unsupervised* that does not use any parallel data (see [Word Translation without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) for more details).
 
-**Decoder** - Translates and predicts the input embedding vectors into one-hot vectors representing English words in the dictionary.
+## Dependencies
+* Python 2/3 with [NumPy](http://www.numpy.org/)/[SciPy](https://www.scipy.org/)
+* [PyTorch](http://pytorch.org/)
+* [Faiss](https://github.com/facebookresearch/faiss) (recommended) for fast nearest neighbor search (CPU or GPU).
 
-![Model](https://github.com/vibhor98/Neural-Machine-Translation-using-Keras/blob/master/images/model.png)
 
-### Code Requirements
-You can install Conda that resolves all the required dependencies for Machine Learning.
+## Get evaluation datasets
+To download monolingual and cross-lingual word embeddings evaluation datasets:
+* Our 110 [bilingual dictionaries](https://github.com/facebookresearch/MUSE#ground-truth-bilingual-dictionaries)
+* 28 monolingual word similarity tasks for 6 languages, and the English word analogy task
+* Cross-lingual word similarity tasks from [SemEval2017](http://alt.qcri.org/semeval2017/task2/)
+* Sentence translation retrieval with [Europarl](http://www.statmt.org/europarl/) corpora
 
-Run: `pip install requirements.txt`
+You can simply run:
 
-### Dataset
-We're using dataset containing pairs of English - Bangla sentences and can be downloaded from [here](http://www.manythings.org/anki/).
-* This dataset is present in `data/ben.txt` file containing 52,820 pairs of English to Bangla phrases.
+```bash
+cd data/
+wget https://dl.fbaipublicfiles.com/arrival/vectors.tar.gz
+wget https://dl.fbaipublicfiles.com/arrival/wordsim.tar.gz
+wget https://dl.fbaipublicfiles.com/arrival/dictionaries.tar.gz
+```
 
-### Preprocessing the dataset
-* To preprocess the dataset, run `pre_process.py` to clean the data and then run `prepare_dataset.py` to break it into smaller training and testing dataset.
-* After running the above scripts, you'll get `english-bangla-both.pkl`, `english-bangla-train.pkl` and `english-bangla-test.pkl` datasets for training and testing purposes.
+Alternatively, you can also download the data with:
 
-The preprocessing of the data involves:
-* Removing punctuation marks from the data.
-* Shuffling the sentences as sentences were previously sorted in the increasing order of their length.
+```bash
+cd data/
+./get_evaluation.sh
+```
 
-### Training the Encoder-Decoder LSTM model
-Run `model.py` to train the model. After successful training, the model will be saved as `model.h5` in your current directory.
-* This model uses **Encoder-Decoder LSTMs** for NMT. In this architecture, the input sequence is encoded by the front-end model called encoder then, decoded by backend model called decoder.
-* It uses Adam Optimizer to train the model using Stochastic Gradient Descent and minimizes the categorical loss function.
+*Note: Requires bash 4. The download of Europarl is disabled by default (slow), you can enable it [here](https://github.com/facebookresearch/MUSE/blob/master/data/get_evaluation.sh#L99-L100).*
 
-### Evaluating the model
-Run `evaluate_model.py` to evaluate the accuracy of the model on both train and test dataset.
-* It loads the best saved `model.h5` model.
-* The model performs pretty well on train set and have been generalized to perform well on test set.
-* After prediction, we calculate Bleu scores for the predicted sentences to check how well the model generalizes.
+## Get monolingual word embeddings
+For pre-trained monolingual word embeddings, we highly recommend [fastText Wikipedia embeddings](https://fasttext.cc/docs/en/pretrained-vectors.html), or using [fastText](https://github.com/facebookresearch/fastText) to train your own word embeddings from your corpus.
 
-### Calculating the Bleu scores
-**BLEU (bilingual evaluation understudy)** is an algorithm for comparing predicted machine translated text with the reference string given by the human. A high BLEU score means the predicted translated sentence is pretty close to the reference string. More information can be found [here](https://en.wikipedia.org/wiki/BLEU). Below are the BLEU scores for both the training set and the testing set along with the predicted and target English sentence corresponding to the given Bangla source sentence.
+You can download the English (en) and Spanish (es) embeddings this way:
+```bash
+# English fastText Wikipedia embeddings
+curl -Lo data/wiki.en.vec https://dl.fbaipublicfiles.com/fasttext/vectors-wiki/wiki.en.vec
+```
+## Align monolingual word embeddings
+(https://en.wikipedia.org/wiki/Orthogonal_Procrustes_problem) alignment.
+* **Unsupervised**: without any parallel data or anchor point, learn a mapping from the source to the target space using adversarial training and (iterative) Procrustes refinement.
 
-### References:
-* [Neural Machine Translation by jointly learning to Align and Translate](https://arxiv.org/pdf/1409.0473v7.pdf)
-* [How to develop a Neural Machine Translation System from scratch](https://machinelearningmastery.com/develop-neural-machine-translation-system-keras/)
+### The unsupervised way: adversarial training and refinement (CPU|GPU)
+To learn a mapping using adversarial training and iterative Procrustes refinement, run:
+```bash
+python unsupervised.py --src_lang en --tgt_lang es --src_emb data/wiki.en.vec --tgt_emb data/wiki.es.vec --n_refinement 5
+```
+By default, the validation metric is the mean cosine of word pairs from a synthetic dictionary built with CSLS (Cross-domain similarity local scaling). For some language pairs (e.g. En-Zh),
+we recommend to center the embeddings using `--normalize_embeddings center`.
+
+### Evaluate monolingual or cross-lingual embeddings (CPU|GPU)
+We also include a simple script to evaluate the quality of monolingual or cross-lingual word embeddings on several tasks:
+
+**Monolingual**
+```bash
+python evaluate.py --src_lang en --src_emb data/wiki.en.vec --max_vocab 200000
+```
+
+**Cross-lingual**
+```bash
+python evaluate.py --src_lang en --tgt_lang es --src_emb data/wiki.en-es.en.vec --tgt_emb data/wiki.en-es.es.vec --max_vocab 200000
+```
+
+## Word embedding format
+By default, the aligned embeddings are exported to a text format at the end of experiments: `--export txt`. Exporting embeddings to a text file can take a while if you have a lot of embeddings. For a very fast export, you can set `--export pth` to export the embeddings in a PyTorch binary file, or simply disable the export (`--export ""`).
+
+When loading embeddings, the model can load:
+* PyTorch binary files previously generated by MUSE (.pth files)
+* fastText binary files previously generated by fastText (.bin files)
+* text files (text file with one word embedding per line)
+
+The two first options are very fast and can load 1 million embeddings in a few seconds, while loading text files can take a while.
+
+## Download
+We provide multilingual embeddings and ground-truth bilingual dictionaries. These embeddings are fastText embeddings that have been aligned in a common space.
+
+### Multilingual word Embeddings
+We release fastText Wikipedia **supervised** word embeddings for **30** languages, aligned in a **single vector space**.
+
+| | | | | | |
+|---|---|---|---|---|---|
+| Bengali: [full](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.txt) [train](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.0-5000.txt) [test](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.5000-6500.txt) 
+
+Contact: [sajid.ahmed1@northsouth.edu](mailto:[sajid.ahmed1@northsouth.edu)
+
+### Related work
+* [T. Mikolov, Q. V Le, I. Sutskever - Exploiting similarities among languages for machine translation, 2013](https://arxiv.org/abs/1309.4168)
+* [G. Dinu, A. Lazaridou, M. Baroni - Improving zero-shot learning by mitigating the hubness problem, 2015](https://arxiv.org/abs/1412.6568)
+* [S. L Smith, D. HP Turban, S. Hamblin, N. Y Hammerla - Offline bilingual word vectors, orthogonal transformations and the inverted softmax, 2017](https://arxiv.org/abs/1702.03859)
+* [M. Artetxe, G. Labaka, E. Agirre - Learning bilingual word embeddings with (almost) no bilingual data, 2017](https://aclanthology.coli.uni-saarland.de/papers/P17-1042/p17-1042)
+* [M. Zhang, Y. Liu, H. Luan, and M. Sun - Adversarial training for unsupervised bilingual lexicon induction, 2017](https://aclanthology.coli.uni-saarland.de/papers/P17-1179/p17-1179)
+* [Y. Hoshen, L. Wolf - An Iterative Closest Point Method for Unsupervised Word Translation, 2018](https://arxiv.org/abs/1801.06126)
+* [A. Joulin, P. Bojanowski, T. Mikolov, E. Grave - Improving supervised bilingual mapping of word embeddings, 2018](https://arxiv.org/abs/1804.07745)
+* [E. Grave, A. Joulin, Q. Berthet - Unsupervised Alignment of Embeddings with Wasserstein Procrustes, 2018](https://arxiv.org/abs/1805.11222)
 
 
 ##  1. Names and IDs
