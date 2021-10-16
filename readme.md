@@ -43,8 +43,22 @@ period of 2 weeks so we could test all our models with varying combinations.
 				gensim==3.2.0
 				tqdm==4.19.5
 				torch==0.3.0
+## -----English To Bangla Translation-----
 
+python3 translate.py -s data/eng_test.txt -sl e -t out_ben.txt
 
+-----Bangla To English Translation-----
+
+python3 translate.py -s data/ben_test.txt -sl b -t out_eng.txt
+
+also can be run throuth demo.ipynb Directly From Google.collab
+Requirements: 
+			python>=3.5.0
+			numpy>=1.14.0
+			jupyter==1.0.0
+			gensim==3.2.0
+			tqdm==4.19.5
+			torch==0.3.0
 
 ## Download the Vectors from these Fast Text links 
 https://fasttext.cc/docs/en/crawl-vectors.html
