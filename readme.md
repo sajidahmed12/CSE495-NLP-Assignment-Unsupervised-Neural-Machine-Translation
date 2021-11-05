@@ -89,6 +89,10 @@ We release fastText Wikipedia **supervised** word embeddings for **30** language
 |---|---|---|---|---|---|
 | Bengali: [full](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.txt) [train](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.0-5000.txt) [test](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.5000-6500.txt) 
 
+### Visualization of the multilingual word embedding space
+![Similar word embeddings in same latent space for Bengali and English words](./docs/aaa.PNG)
+
+
 Contact: [sajid.ahmed1@northsouth.edu](mailto:[sajid.ahmed1@northsouth.edu)
 
 ### Related work
