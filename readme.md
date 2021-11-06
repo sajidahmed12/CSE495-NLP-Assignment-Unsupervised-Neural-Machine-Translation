@@ -6,7 +6,8 @@
 We include two methods, one *supervised* that uses a bilingual dictionary or identical character strings, and one *unsupervised* that does not use any parallel data (see [Word Translation without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) for more details).
 
 ## Dependencies
-* Python 3 with ![NumPy](http://www.numpy.org/)
+* Python 3
+* [NumPy](http://www.numpy.org/)
 * [SciPy](https://www.scipy.org/)
 * [PyTorch](http://pytorch.org/)
 * [Faiss](https://github.com/facebookresearch/faiss) (recommended) for fast nearest neighbor search (CPU or GPU).
