@@ -99,9 +99,9 @@ Bengali: [full](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.txt) [
 * ii. English [vectors-en.txt](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz) 
 
 ##### 2. Then place these vectors in ./data/vec/vectors-{bn.en}.txt location. 
-* Download src.pickle from this [Gdrive link](https://drive.google.com/file/d/19bGSyykc5oYeUwy7BJS6PFm0BSbnRrUa/view) and place in the root directory. 
-* Download tgt.pickle from this [Gdrivelink](https://drive.google.com/file/d/1GuFLa9lAvzXxfpWkGspmxefQ_m544H5S/view) and place in the root directory. 
-* Download all.pickle from this [Gdrivelink](https://drive.google.com/file/d/1SVsgUKXeGf3gbZmhqFwM3_mLgH5MB0ec/view) and place in the root directory. 
+* Download src.pickle from this [link](https://drive.google.com/file/d/19bGSyykc5oYeUwy7BJS6PFm0BSbnRrUa/view) and place in the root directory. 
+* Download tgt.pickle from this [link](https://drive.google.com/file/d/1GuFLa9lAvzXxfpWkGspmxefQ_m544H5S/view) and place in the root directory. 
+* Download all.pickle from this [link](https://drive.google.com/file/d/1SVsgUKXeGf3gbZmhqFwM3_mLgH5MB0ec/view) and place in the root directory. 
 
 ### Visualization of the multilingual word embedding space
 [Similar word embeddings in same latent space for Bengali and English words](./docs/aaa.PNG)
