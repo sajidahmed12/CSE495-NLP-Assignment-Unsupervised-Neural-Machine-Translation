@@ -1,4 +1,5 @@
-# Unsupervised Neural Machine Translation Bangla To English
+# Unsupervised Neural Machine Translation 
+## Bangla To English, English To Bangla
 
 * state-of-the-art multilingual word embeddings ([fastText](https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md) embeddings aligned in a common space)
 * large-scale high-quality bilingual dictionaries for training and evaluation
