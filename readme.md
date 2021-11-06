@@ -122,6 +122,18 @@ python3 translate.py -s data/eng_test.txt -sl e -t out_ben.txt
 python3 translate.py -s data/ben_test.txt -sl b -t out_eng.txt
 ```
 
+## For Training with the data and the fastText vectors run this command after placing all the vector files and data into the correct repositories.
+
+```bash
+python train.py -train_src_mono data/eng.txt -train_tgt_mono data/ben.txt -src_embeddings data/vec/vectors.en.txt -tgt_embeddings data/vec/vectors.bn.txt -all_vocabulary data/demo.vocab.pt -usv_embedding_training 1 -layers 3 -rnn_size 700 -src_vocab_size 40000 -tgt_vocab_size 40000 -print_every 100 -save_every 100 -usv_num_words_in_batch 250 -discriminator_hidden_size 1024 -unsupervised_epochs 10 -save_model en_ko_model_attn -sv_embedding_training 0 -reset_vocabularies 0 -src_to_tgt_dict data/en-bn.txt -tgt_to_src_dict data/bn-en.txt
+
+```
+
+### Sample outputs 
+
+[English to Bangla](./docs/unp.jpg) 
+* bangla to English
+
 #### Contributors 
 * Md Sajid Ahmed- 1610364042
 * Zahin Akram- 1610618042
