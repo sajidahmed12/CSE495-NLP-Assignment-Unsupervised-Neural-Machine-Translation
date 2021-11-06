@@ -7,10 +7,10 @@ We include two methods, one *supervised* that uses a bilingual dictionary or ide
 
 ## Dependencies
 * Python 3 with ![NumPy](http://www.numpy.org/)
-* ![SciPy](https://www.scipy.org/)
-* ![PyTorch](http://pytorch.org/)
-* ![Faiss](https://github.com/facebookresearch/faiss) (recommended) for fast nearest neighbor search (CPU or GPU).
-* ![MUSE](https://github.com/facebookresearch/MUSE)
+* [SciPy](https://www.scipy.org/)
+* [PyTorch](http://pytorch.org/)
+* [Faiss](https://github.com/facebookresearch/faiss) (recommended) for fast nearest neighbor search (CPU or GPU).
+* [MUSE](https://github.com/facebookresearch/MUSE)
 
 
 ## Get evaluation datasets
@@ -92,16 +92,16 @@ We release fastText Wikipedia **supervised** word embeddings for **30** language
 | Bengali: [full](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.txt) [train](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.0-5000.txt) [test](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.5000-6500.txt) 
 
 ##### 1. Download the Vectors from these Fast Text vectors.
-* i.  Bangla ![vectors-bn.txt](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.bn.300.vec.gz) 
-* ii. English ![vectors-en.txt](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz) 
+* i.  Bangla [vectors-bn.txt](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.bn.300.vec.gz) 
+* ii. English [vectors-en.txt](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz) 
 
 ##### 2. Then place these vectors in ./data/vec/vectors-{bn.en}.txt location. 
 
 ### Visualization of the multilingual word embedding space
-![Similar word embeddings in same latent space for Bengali and English words](./docs/aaa.PNG)
+[Similar word embeddings in same latent space for Bengali and English words](./docs/aaa.PNG)
 
 
-#### Download the trained_model.pt file from the following link https://drive.google.com/file/d/17-RFIitkcnphSQZ_CkxN_203laTO8lVH/view
+#### Download the trained_model.pt file from the following [link](https://drive.google.com/file/d/17-RFIitkcnphSQZ_CkxN_203laTO8lVH/view)
 * English To Bangla Translation
 python3 translate.py -s data/eng_test.txt -sl e -t out_ben.txt
 
@@ -111,10 +111,7 @@ Run the following command to test and translate sample data.
 ```bash
 python3 translate.py -s data/ben_test.txt -sl b -t out_eng.txt
 ```
-This model can be run throuth demo.ipynb notebook directly from Google collab
-
-
-Contact: [sajid.ahmed1@northsouth.edu](mailto:[sajid.ahmed1@northsouth.edu)
+This model can be run throuth demo.ipynb notebook directly from Google collab. 
 
 #### Contributors 
 * Md Sajid Ahmed- 1610364042
@@ -153,3 +150,6 @@ as well as environmental issues when running multiple models.
 
 * The work would have been better if we had unrestrained access to a powerful system for an extensive
 period of 2 weeks so we could test all our models with varying combinations.
+
+
+### For any furthur query please feel free to contact me [Md Sajid Ahmed](mailto:[sajid.ahmed1@northsouth.edu) 
