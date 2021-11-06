@@ -131,8 +131,8 @@ python train.py -train_src_mono data/eng.txt -train_tgt_mono data/ben.txt -src_e
 
 ### Sample outputs 
 
-[English to Bangla](./docs/unp.jpg) 
-* bangla to English
+![English to Bangla](./docs/unp.jpg) 
+![Bangla to English]() 
 
 #### Contributors 
 * Md Sajid Ahmed- 1610364042
