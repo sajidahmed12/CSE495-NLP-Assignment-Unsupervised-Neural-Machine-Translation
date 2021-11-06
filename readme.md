@@ -1,4 +1,4 @@
-# Neural Machine Translation Bangla To English
+# Unsupervised Neural Machine Translation Bangla To English
 
 * state-of-the-art multilingual word embeddings ([fastText](https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md) embeddings aligned in a common space)
 * large-scale high-quality bilingual dictionaries for training and evaluation
@@ -6,9 +6,11 @@
 We include two methods, one *supervised* that uses a bilingual dictionary or identical character strings, and one *unsupervised* that does not use any parallel data (see [Word Translation without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) for more details).
 
 ## Dependencies
-* Python 2/3 with [NumPy](http://www.numpy.org/)/[SciPy](https://www.scipy.org/)
-* [PyTorch](http://pytorch.org/)
-* [Faiss](https://github.com/facebookresearch/faiss) (recommended) for fast nearest neighbor search (CPU or GPU).
+* Python 3 with ![NumPy](http://www.numpy.org/)
+* ![SciPy](https://www.scipy.org/)
+* ![PyTorch](http://pytorch.org/)
+* ![Faiss](https://github.com/facebookresearch/faiss) (recommended) for fast nearest neighbor search (CPU or GPU).
+* ![MUSE](https://github.com/facebookresearch/MUSE)
 
 
 ## Get evaluation datasets
@@ -18,7 +20,7 @@ To download monolingual and cross-lingual word embeddings evaluation datasets:
 * Cross-lingual word similarity tasks from [SemEval2017](http://alt.qcri.org/semeval2017/task2/)
 * Sentence translation retrieval with [Europarl](http://www.statmt.org/europarl/) corpora
 
-You can simply run:
+Simply run:
 
 ```bash
 cd data/
@@ -39,7 +41,7 @@ cd data/
 ## Get monolingual word embeddings
 For pre-trained monolingual word embeddings, we highly recommend [fastText Wikipedia embeddings](https://fasttext.cc/docs/en/pretrained-vectors.html), or using [fastText](https://github.com/facebookresearch/fastText) to train your own word embeddings from your corpus.
 
-You can download the English (en) and Spanish (es) embeddings this way:
+You can download the English (en) and Bangla (bn) embeddings this way:
 ```bash
 # English fastText Wikipedia embeddings
 curl -Lo data/wiki.en.vec https://dl.fbaipublicfiles.com/fasttext/vectors-wiki/wiki.en.vec
@@ -85,40 +87,48 @@ We provide multilingual embeddings and ground-truth bilingual dictionaries. Thes
 ### Multilingual word Embeddings
 We release fastText Wikipedia **supervised** word embeddings for **30** languages, aligned in a **single vector space**.
 
-| | | | | | |
-|---|---|---|---|---|---|
+|
+|---|
 | Bengali: [full](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.txt) [train](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.0-5000.txt) [test](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.5000-6500.txt) 
+
+##### 1. Download the Vectors from these Fast Text vectors.
+* i.  Bangla ![vectors-bn.txt](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.bn.300.vec.gz) 
+* ii. English ![vectors-en.txt](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz) 
+
+##### 2. Then place these vectors in ./data/vec/vectors-{bn.en}.txt location. 
 
 ### Visualization of the multilingual word embedding space
 ![Similar word embeddings in same latent space for Bengali and English words](./docs/aaa.PNG)
 
 
+#### Download the trained_model.pt file from the following link https://drive.google.com/file/d/17-RFIitkcnphSQZ_CkxN_203laTO8lVH/view
+* English To Bangla Translation
+python3 translate.py -s data/eng_test.txt -sl e -t out_ben.txt
+
+#### -----Bangla To English Translation-----
+Run the following command to test and translate sample data. 
+
+```bash
+python3 translate.py -s data/ben_test.txt -sl b -t out_eng.txt
+```
+This model can be run throuth demo.ipynb notebook directly from Google collab
+
+
 Contact: [sajid.ahmed1@northsouth.edu](mailto:[sajid.ahmed1@northsouth.edu)
 
-### Related work
-* [T. Mikolov, Q. V Le, I. Sutskever - Exploiting similarities among languages for machine translation, 2013](https://arxiv.org/abs/1309.4168)
-* [G. Dinu, A. Lazaridou, M. Baroni - Improving zero-shot learning by mitigating the hubness problem, 2015](https://arxiv.org/abs/1412.6568)
-* [S. L Smith, D. HP Turban, S. Hamblin, N. Y Hammerla - Offline bilingual word vectors, orthogonal transformations and the inverted softmax, 2017](https://arxiv.org/abs/1702.03859)
-* [M. Artetxe, G. Labaka, E. Agirre - Learning bilingual word embeddings with (almost) no bilingual data, 2017](https://aclanthology.coli.uni-saarland.de/papers/P17-1042/p17-1042)
-* [M. Zhang, Y. Liu, H. Luan, and M. Sun - Adversarial training for unsupervised bilingual lexicon induction, 2017](https://aclanthology.coli.uni-saarland.de/papers/P17-1179/p17-1179)
-* [Y. Hoshen, L. Wolf - An Iterative Closest Point Method for Unsupervised Word Translation, 2018](https://arxiv.org/abs/1801.06126)
-* [A. Joulin, P. Bojanowski, T. Mikolov, E. Grave - Improving supervised bilingual mapping of word embeddings, 2018](https://arxiv.org/abs/1804.07745)
-* [E. Grave, A. Joulin, Q. Berthet - Unsupervised Alignment of Embeddings with Wasserstein Procrustes, 2018](https://arxiv.org/abs/1805.11222)
-
-
-##  1. Names and IDs
+#### Contributors 
+* Md Sajid Ahmed- 1610364042
 * Zahin Akram- 1610618042
-* Sajid Ahmed- 1610364042
 * Arifuzzaman Arman- 1610551042
 * Md Rakib Imtiaz- 1610294642
 
-## 2. Contribution Per member:
+#### 2. Contribution Per member:
 
 * All 4 members of the group worked together in understanding the paper 
 through by separate and then reading the paper together. All members together began
 the training of word embedding through MUSE. It was Sajid and Zahin who looked at the 
 code deeply and worked in editing the necessary portion of what was required. Sajid
-later ran the model and generated the mapping that was later shown to Sir.
+later ran the model and generated the mapping that was later shown to professor Dr. Nabeel Mohammad.
 
 * Sajid looked at the models that were to be used for training once the first part was over.
 The decision of the model was decided by Zahin and Sajid together as they were primarily in charge
@@ -143,24 +153,3 @@ as well as environmental issues when running multiple models.
 
 * The work would have been better if we had unrestrained access to a powerful system for an extensive
 period of 2 weeks so we could test all our models with varying combinations.
-
-
-#### Please download the trained_model.pt file from the foloowing link https://drive.google.com/file/d/17-RFIitkcnphSQZ_CkxN_203laTO8lVH/view?usp=sharing
-#### -----English To Bangla Translation-----
-
-* python3 translate.py -s data/eng_test.txt -sl e -t out_ben.txt
-
-#### -----Bangla To English Translation-----
-
-* python3 translate.py -s data/ben_test.txt -sl b -t out_eng.txt
-
-also can be run throuth demo.ipynb Directly From Google.collab
-
-## Download the Vectors from these Fast Text links 
-https://fasttext.cc/docs/en/crawl-vectors.html
-vectors-bn.txt  #link: https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.bn.300.vec.gz
-
-vectors-en.txt  #Link : https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz
-
-
-and place then in ./data/vec/vectors-{bn.en}.txt
