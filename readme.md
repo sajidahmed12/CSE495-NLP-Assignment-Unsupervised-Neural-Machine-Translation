@@ -104,7 +104,7 @@ Bengali: [full](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.txt) [
 * Download all.pickle from this [link](https://drive.google.com/file/d/1SVsgUKXeGf3gbZmhqFwM3_mLgH5MB0ec/view) and place in the root directory. 
 
 ### Visualization of the multilingual word embedding space
-[Similar word embeddings in same latent space for Bengali and English words](./docs/aaa.PNG)
+![Similar word embeddings in same latent space for Bengali and English words](./docs/aaa.PNG)
 
 ## Testing the Model with Bilingual Translation
 
