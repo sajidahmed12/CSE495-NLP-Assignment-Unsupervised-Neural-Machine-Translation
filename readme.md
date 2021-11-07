@@ -8,10 +8,15 @@ Neural Machine Translation (NMT) is one of the most common type of machine trans
 This approach includes both *supervised* method that uses a bilingual dictionary or identical character strings, and also *unsupervised* method that does not use any parallel data (see [Word Translation without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) for more details).
 
 ## Dependencies
-
-* Python 2/3 with [NumPy](http://www.numpy.org/)/[SciPy](https://www.scipy.org/)
+* Python >=3.5.0
+* [NumPy](http://www.numpy.org/)
+* Jupyter-Notebook
+* gensim
+* tqdm
+* [SciPy](https://www.scipy.org/)
 * [PyTorch](http://pytorch.org/)
 * [Faiss](https://github.com/facebookresearch/faiss) (recommended) for fast nearest neighbor search (CPU or GPU).
+* [MUSE](https://github.com/facebookresearch/MUSE)
 
 ## Datasets
 
@@ -70,16 +75,25 @@ You can download the English (en) embeddings this way:
 # English fastText Wikipedia embeddings
 curl -Lo data/wiki.en.vec https://dl.fbaipublicfiles.com/fasttext/vectors-wiki/wiki.en.vec
 ```
+
+You can download the Bangla (bn) embeddings this way:
+```bash
+# Bangla fastText Wikipedia embeddings
+curl -Lo data/wiki.bn.vec https://dl.fbaipublicfiles.com/fasttext/vectors-wiki/wiki.bn.vec
+```
+
 ### Align monolingual word embeddings
 (https://en.wikipedia.org/wiki/Orthogonal_Procrustes_problem) alignment.
 * **Unsupervised**: without any parallel data or anchor point, learn a mapping from the source to the target space using adversarial training and (iterative) Procrustes refinement.
 
 #### The unsupervised way: adversarial training and refinement (CPU|GPU)
 To learn a mapping using adversarial training and iterative Procrustes refinement, run:
+
 ```bash
-python unsupervised.py --src_lang en --tgt_lang es --src_emb data/wiki.en.vec --tgt_emb data/wiki.es.vec --n_refinement 5
+python3 unsupervised.py --src_lang en --tgt_lang es --src_emb data/wiki.en.vec --tgt_emb data/wiki.es.vec --n_refinement 5
 ```
-By default, the validation metric is the mean cosine of word pairs from a synthetic dictionary built with CSLS (Cross-domain similarity local scaling). For some language pairs (e.g. En-Zh),
+
+By default, the validation metric is the mean cosine of word pairs from a synthetic dictionary built with CSLS (Cross-domain similarity local scaling). For some language pairs (e.g. En-Bn),
 we recommend to center the embeddings using `--normalize_embeddings center`.
 
 #### Evaluate monolingual or cross-lingual embeddings (CPU|GPU)
@@ -88,12 +102,12 @@ We also include a simple script to evaluate the quality of monolingual or cross-
 
 **Monolingual**
 ```bash
-python evaluate.py --src_lang en --src_emb data/wiki.en.vec --max_vocab 200000
+python3 evaluate.py --src_lang en --src_emb data/wiki.en.vec --max_vocab 200000
 ```
 
 **Cross-lingual**
 ```bash
-python evaluate.py --src_lang en --tgt_lang es --src_emb data/wiki.en-es.en.vec --tgt_emb data/wiki.en-es.es.vec --max_vocab 200000
+python3 evaluate.py --src_lang en --tgt_lang bn --src_emb data/wiki.en-bn.en.vec --tgt_emb data/wiki.en-es.bn.vec --max_vocab 200000
 ```
 ## Word embedding format
 By default, the aligned embeddings are exported to a text format at the end of experiments: `--export txt`. Exporting embeddings to a text file can take a while if you have a lot of embeddings. For a very fast export, you can set `--export pth` to export the embeddings in a PyTorch binary file, or simply disable the export (`--export ""`).
@@ -169,7 +183,7 @@ python3 translate.py -s data/ben_test.txt -sl b -t out_eng.txt
 ## For Training with the data and the fastText vectors run this command after placing all the vector files and data into the correct repositories.
 
 ```bash
-python train.py -train_src_mono data/eng.txt -train_tgt_mono data/ben.txt -src_embeddings data/vec/vectors.en.txt -tgt_embeddings data/vec/vectors.bn.txt -all_vocabulary data/demo.vocab.pt -usv_embedding_training 1 -layers 3 -rnn_size 700 -src_vocab_size 40000 -tgt_vocab_size 40000 -print_every 100 -save_every 100 -usv_num_words_in_batch 250 -discriminator_hidden_size 1024 -unsupervised_epochs 10 -save_model en_ko_model_attn -sv_embedding_training 0 -reset_vocabularies 0 -src_to_tgt_dict data/en-bn.txt -tgt_to_src_dict data/bn-en.txt
+python3 train.py -train_src_mono data/eng.txt -train_tgt_mono data/ben.txt -src_embeddings data/vec/vectors.en.txt -tgt_embeddings data/vec/vectors.bn.txt -all_vocabulary data/demo.vocab.pt -usv_embedding_training 1 -layers 3 -rnn_size 700 -src_vocab_size 40000 -tgt_vocab_size 40000 -print_every 100 -save_every 100 -usv_num_words_in_batch 250 -discriminator_hidden_size 1024 -unsupervised_epochs 10 -save_model en_ko_model_attn -sv_embedding_training 0 -reset_vocabularies 0 -src_to_tgt_dict data/en-bn.txt -tgt_to_src_dict data/bn-en.txt
 ```
 
 
