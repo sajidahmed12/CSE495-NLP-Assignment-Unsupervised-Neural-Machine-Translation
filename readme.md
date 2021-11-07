@@ -259,8 +259,8 @@ Suprervisor
 
 ### References
 
-[1] Artetxe, M., Labaka, G., Agirre, E., & Cho, K. (2017). Unsupervised neural machine translation. arXiv preprint arXiv:1710.11041.
-[2] Lample, G., Conneau, A., Denoyer, L., & Ranzato, M. A. (2017). Unsupervised machine translation using monolingual corpora only. arXiv preprint arXiv:1711.00043.
-[3] Lian, X., Jain, K., Truszkowski, J., Poupart, P., & Yu, Y. (2020). Unsupervised Multilingual Alignment using Wasserstein Barycenter. arXiv preprint arXiv:2002.00743.
+- [1] Artetxe, M., Labaka, G., Agirre, E., & Cho, K. (2017). Unsupervised neural machine translation. arXiv preprint arXiv:1710.11041.
+- [2] Lample, G., Conneau, A., Denoyer, L., & Ranzato, M. A. (2017). Unsupervised machine translation using monolingual corpora only. arXiv preprint arXiv:1711.00043.
+- [3] Lian, X., Jain, K., Truszkowski, J., Poupart, P., & Yu, Y. (2020). Unsupervised Multilingual Alignment using Wasserstein Barycenter. arXiv preprint arXiv:2002.00743.
 
 ### For any furthur query please feel free to contact me [Md Sajid Ahmed](mailto:[sajid.ahmed1@northsouth.edu) 
