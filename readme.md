@@ -20,6 +20,7 @@ This approach includes both *supervised* method that uses a bilingual dictionary
 * [MUSE](https://github.com/facebookresearch/MUSE)
 
 ## Datasets
+SUPara0.8M: A Balanced English-Bangla Parallel Corpus [SUPARA-BENCHMARK](https://ieee-dataport.org/open-access/supara-benchmark-benchmark-dataset-english-bangla-machine-translation)
 
 To download monolingual and cross-lingual word embeddings evaluation datasets:
 * [bilingual dictionaries](https://github.com/facebookresearch/MUSE#ground-truth-bilingual-dictionaries)
