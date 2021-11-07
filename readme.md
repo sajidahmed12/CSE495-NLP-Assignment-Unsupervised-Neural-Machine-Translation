@@ -95,7 +95,7 @@ python evaluate.py --src_lang en --src_emb data/wiki.en.vec --max_vocab 200000
 ```bash
 python evaluate.py --src_lang en --tgt_lang es --src_emb data/wiki.en-es.en.vec --tgt_emb data/wiki.en-es.es.vec --max_vocab 200000
 ```
-### Word embedding format
+## Word embedding format
 By default, the aligned embeddings are exported to a text format at the end of experiments: `--export txt`. Exporting embeddings to a text file can take a while if you have a lot of embeddings. For a very fast export, you can set `--export pth` to export the embeddings in a PyTorch binary file, or simply disable the export (`--export ""`).
 
 When loading embeddings, the model can load:
@@ -105,15 +105,22 @@ When loading embeddings, the model can load:
 
 The two first options are very fast and can load 1 million embeddings in a few seconds, while loading text files can take a while.
 
+## Download
+We provide multilingual embeddings and ground-truth bilingual dictionaries. These embeddings are fastText embeddings that have been aligned in a common space.
 
-#### Multilingual word Embeddings
+##### Multilingual word Embeddings
 We release fastText Wikipedia **supervised** word embeddings for **30** languages, aligned in a **single vector space**.
 
-| | | | | | |
-|---|---|---|---|---|---|
-| Bengali: [full](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.txt) [train](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.0-5000.txt) [test](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.5000-6500.txt) 
+Bengali: [full](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.txt) [train](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.0-5000.txt) [test](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.5000-6500.txt) 
 
-We provide multilingual embeddings and ground-truth bilingual dictionaries. These embeddings are fastText embeddings that have been aligned in a common space.
+##### 1. Download the Vectors from these Fast Text vectors.
+* i.  Bangla [vectors-bn.txt](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.bn.300.vec.gz) 
+* ii. English [vectors-en.txt](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz) 
+
+##### 2. Then place these vectors in ./data/vec/vectors-{bn.en}.txt location. 
+* Download src.pickle from this [link](https://drive.google.com/file/d/19bGSyykc5oYeUwy7BJS6PFm0BSbnRrUa/view) and place in the root directory. 
+* Download tgt.pickle from this [link](https://drive.google.com/file/d/1GuFLa9lAvzXxfpWkGspmxefQ_m544H5S/view) and place in the root directory. 
+* Download all.pickle from this [link](https://drive.google.com/file/d/1SVsgUKXeGf3gbZmhqFwM3_mLgH5MB0ec/view) and place in the root directory. 
 
 ## Results
 
@@ -143,6 +150,28 @@ Text Pre-processing output
 -->
 ![Text Preprocessing](./docs/text_preprocessing.jpg)
 
+## Testing the Model with Bilingual Translation
+
+Download the trained_model.pt file from the following [link](https://drive.google.com/file/d/17-RFIitkcnphSQZ_CkxN_203laTO8lVH/view)
+* English To Bangla Translation
+* Run the following command to test and translate sample data. 
+
+```bash
+python3 translate.py -s data/eng_test.txt -sl e -t out_ben.txt
+```
+* Bangla To English Translation
+* Run the following command to test and translate sample data. 
+
+```bash
+python3 translate.py -s data/ben_test.txt -sl b -t out_eng.txt
+```
+
+## For Training with the data and the fastText vectors run this command after placing all the vector files and data into the correct repositories.
+
+```bash
+python train.py -train_src_mono data/eng.txt -train_tgt_mono data/ben.txt -src_embeddings data/vec/vectors.en.txt -tgt_embeddings data/vec/vectors.bn.txt -all_vocabulary data/demo.vocab.pt -usv_embedding_training 1 -layers 3 -rnn_size 700 -src_vocab_size 40000 -tgt_vocab_size 40000 -print_every 100 -save_every 100 -usv_num_words_in_batch 250 -discriminator_hidden_size 1024 -unsupervised_epochs 10 -save_model en_ko_model_attn -sv_embedding_training 0 -reset_vocabularies 0 -src_to_tgt_dict data/en-bn.txt -tgt_to_src_dict data/bn-en.txt
+```
+
 
 NMT Sample Output
 <!-- To Resize need to use http link
@@ -151,80 +180,26 @@ NMT Sample Output
 ![NMT Output](./docs/NMT_Output.png)
 
 
-
-
+Suprervisor
+* [Dr. Nabeel Mohammed](http://ece.northsouth.edu/people/dr-nabeel-mohammed/)
 
 ###  Author Names and Contribution
 
-Suprervisor
-* Dr. Nabeel Mohammed
+* [Md Sajid Ahmed](https://sites.google.com/view/sajid-site)
+* [Zahin Akram](https://www.linkedin.com/in/zahin-akram-3b9600121)
+* [Arifuzzaman Arman](https://www.linkedin.com/in/arifuzzaman-a-47b34898/)
+* [Md Rakib Imtiaz](https://www.linkedin.com/in/mohammad-rakib-imtiaz-277944216)
 
-Authors
+#### Contribution Per member:
 
-* Zahin Akram- 1610618042
-* Sajid Ahmed- 1610364042
-* Arifuzzaman Arman- 1610551042
-* Md Rakib Imtiaz- 1610294642
+* All four group members worked together to understand the paper by separating and reading the article together. All members together began the training of word embedding through MUSE. Sajid and Zahin looked at the code profoundly and worked on editing the necessary portion of what was required. Sajid later ran the model and generated the mapping that the group showed to professor Dr. Nabeel Mohammad.
 
-Contact: [sajid.ahmed1@northsouth.edu](mailto:[sajid.ahmed1@northsouth.edu)
+* Sajid looked at the models to be used for training once the first part was over. The model's decision was decided by Zahin and Sajid together as they were primarily in charge of the assignment. We made some significant adjustments. Sajid ran the model and fixed the issues with his PC. He also had provided the dataset for training. Sajid oversaw the training progress on his PC. 
 
-* All 4 members of the group worked together in understanding the paper 
-through by separate and then reading the paper together. All members together began
-the training of word embedding through MUSE. It was Sajid and Zahin who looked at the 
-code deeply and worked in editing the necessary portion of what was required. Sajid
-later ran the model and generated the mapping that was later shown to Sir.
+## Notes:
 
-* Sajid looked at the models that were to be used for training once the first part was over.
-The decision of the model was decided by Zahin and Sajid together as they were primarily in charge
-of the assignment. Once the decision of model was made, further adjustments were made together.
-Sajid ran the models necessary in his PC. The dataset was also provided by Sajid.
-Sajid oversaw the training in his PC. Zahin and Sajid made final adjustments.
+* A lot of issues were the specifications of available systems. The embeddings for the English vocabulary were extremely large and had to reduce down for training alongside Bangla words. We wrote some code for a specific amount of vocabulary. However, even that was not enough, Since the vocabulary was concise for Bangla. The problem was found while reading the whole file at once. It was too large for a small set of RAM to open and process it any further. We had to edit the original vocab files both for Bangla and English to address the memory error.
 
-#### Notes:
+* We had chosen around sample 5000 words based on frequency. However, most frequent English and Bangla words aren't similar at all. So we had to relocate some words and collect the most feasible ones. Training and evaluating took a very long time to finish. The work would have been better if we had unshackled access to a robust system for an extensive period of 2 weeks for training and testing with an extensive vocabulary and bigger vector space. Then, we could
 
-* A lot of issue was the specifications of available systems. The embeddings for the English
-vocabulary was extremely large and had to be redone using fewer words. We wrote some code for 
-specific amount of vocabulary however even that was not working. We tested that code on some other
-files and they worked fine. The problem was that the file was too large that it couldn't be opened.
-We had to edit the original final to address the memory error.
-
-* The words chosen were based on frequency. However, most frequent English and Bangla words are different. There was also the Unicode error that took a while to solve. It was later solved by the Temporary use of an UNIX system but it had low specifications and wasn't available for extensive use. We had a lot of problems in training and evaluating training as each training took very long and not the same vector file could be used for every model. We also had infrequent type error issues
-as well as environmental issues when running multiple models.
-
-* The work would have been better if we had unrestrained access to a powerful system for an extensive period of 2 weeks so we could test all our models with varying combinations.
-
-## Important Links
-
-#### Download the trained_model.pt file from the following link: 
-
-https://drive.google.com/file/d/17-RFIitkcnphSQZ_CkxN_203laTO8lVH/view?usp=sharing
-
-#### -- English To Bangla Translation --
-
-* python3 translate.py -s data/eng_test.txt -sl e -t out_ben.txt
-
-#### -- Bangla To English Translation --
-
-* python3 translate.py -s data/ben_test.txt -sl b -t out_eng.txt
-
-also can be run through demo.ipynb Directly From Google.colab
-
-#### Download the Vectors from these Fast Text links:
-
-Word vectors for 157 languages (Fasttext) - https://fasttext.cc/docs/en/crawl-vectors.html
-
-vectors-bn.txt -- https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.bn.300.vec.gz
-
-vectors-en.txt -- https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz
-and place then in ./data/vec/vectors-{bn.en}.txt
-
-## References
-
-* [T. Mikolov, Q. V Le, I. Sutskever - Exploiting similarities among languages for machine translation, 2013](https://arxiv.org/abs/1309.4168)
-* [G. Dinu, A. Lazaridou, M. Baroni - Improving zero-shot learning by mitigating the hubness problem, 2015](https://arxiv.org/abs/1412.6568)
-* [S. L Smith, D. HP Turban, S. Hamblin, N. Y Hammerla - Offline bilingual word vectors, orthogonal transformations and the inverted softmax, 2017](https://arxiv.org/abs/1702.03859)
-* [M. Artetxe, G. Labaka, E. Agirre - Learning bilingual word embeddings with (almost) no bilingual data, 2017](https://aclanthology.coli.uni-saarland.de/papers/P17-1042/p17-1042)
-* [M. Zhang, Y. Liu, H. Luan, and M. Sun - Adversarial training for unsupervised bilingual lexicon induction, 2017](https://aclanthology.coli.uni-saarland.de/papers/P17-1179/p17-1179)
-* [Y. Hoshen, L. Wolf - An Iterative Closest Point Method for Unsupervised Word Translation, 2018](https://arxiv.org/abs/1801.06126)
-* [A. Joulin, P. Bojanowski, T. Mikolov, E. Grave - Improving supervised bilingual mapping of word embeddings, 2018](https://arxiv.org/abs/1804.07745)
-* [E. Grave, A. Joulin, Q. Berthet - Unsupervised Alignment of Embeddings with Wasserstein Procrustes, 2018](https://arxiv.org/abs/1805.11222)
+### For any furthur query please feel free to contact me [Md Sajid Ahmed](mailto:[sajid.ahmed1@northsouth.edu) 
