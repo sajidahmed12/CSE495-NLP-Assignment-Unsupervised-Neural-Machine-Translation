@@ -4,7 +4,7 @@ Neural machine translation (NMT) has recently become the dominant paradigm to ma
 
 * state-of-the-art multilingual word embeddings ([fastText](https://github.com/facebookresearch/fastText/tree/main/alignment) embeddings aligned in a common space)
 * large-scale high-quality bilingual dictionaries for training and evaluation
-* ([MUSE](https://github.com/facebookresearch/MUSE)).
+* Multilingual Unsupervised and Supervised Embeddings([MUSE](https://github.com/facebookresearch/MUSE)).
 
 This approach includes both *supervised* method that uses a bilingual dictionary or identical character strings, and also *unsupervised* method that does not use any parallel data (see [Word Translation without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) for more details).
 
