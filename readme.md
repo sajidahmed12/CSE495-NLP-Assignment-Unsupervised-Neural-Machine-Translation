@@ -192,7 +192,7 @@ NMT Sample Output
 <!-- To Resize need to use http link
 ![NMT Output](link_here =250x250) 
 -->
-![NMT Output](./docs/NMT_Output.png)
+![NMT Output](./docs/NMT_Output.jpg)
 
 
 Suprervisor
