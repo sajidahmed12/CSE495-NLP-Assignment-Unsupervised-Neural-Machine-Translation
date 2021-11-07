@@ -1,4 +1,4 @@
-# Unsupervised Neural Machine Translation (From Bangla To English & English to Bangla)
+# Unsupervised Neural Machine Translation (Bangla To English & English to Bangla)
 
 Neural machine translation (NMT) has recently become the dominant paradigm to machine translation (Bahdanau et al., 2014; Sutskever et al., 2014). As opposed to the traditional statistical machine translation (SMT), NMT systems are trained end-to-end, take advantage of continuous representations that greatly alleviate the sparsity problem, and make use of much larger contexts, thus mitigating the locality problem. The essential advantage of NMT is that it gives a solitary system that can be prepared to unravel the source and target text.One of the most well recognized NMT library is Multilingual Unsupervised and Supervised Embeddings. 
 
