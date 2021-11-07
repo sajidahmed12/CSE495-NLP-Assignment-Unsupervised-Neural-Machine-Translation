@@ -158,12 +158,51 @@ k = 10: 63.200000 <br />
 ![Similar word embeddings in same latent space for Bengali and English words](./docs/Word_Embeddings.PNG)
 
 ## Results Outputs
-
-Text Pre-processing output
+#### Eng-to Bangla 
 <!-- To Resize need to use http link
 ![Text Preprocessing](link_here =250x250) 
 -->
-![Text Preprocessing](./docs/text_preprocessing.jpg)
+
+<!--
+[Text Preprocessing](./docs/text_preprocessing.jpg)
+-->
+```bash
+
+Input sentence: Go.
+Decoded sentence: যাও।
+
+Input sentence: Smile.
+Decoded sentence: একটু হাসুন।
+
+Input sentence: Hit Tom.
+Decoded sentence: টমকে মারুন।
+
+Input sentence: Help me!
+Decoded sentence: আমাদের সাহায্য করুন।
+
+Input sentence: Call me.
+Decoded sentence: আমাকে আগামীকাল ফোন করবেন।
+
+```
+
+#### Bangla-To English
+
+```bash
+Input sentence: যাও।
+Decoded sentence: Go.
+
+Input sentence: একটু হাসুন।
+Decoded sentence: Smile
+
+Input sentence: টমকে মারুন।
+Decoded sentence: Hit Tom.
+
+Input sentence: আমাদের সাহায্য করুন।
+Decoded sentence: Help me!
+
+Input sentence: আমাকে আগামীকাল ফোন করবেন।
+Decoded sentence: Call me.
+```
 
 ## Testing the Model with Bilingual Translation
 
