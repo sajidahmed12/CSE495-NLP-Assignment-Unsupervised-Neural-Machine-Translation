@@ -1,9 +1,10 @@
-# Neural Machine Translation (NMT) From Bangla To English
+# Unsupervised Neural Machine Translation (From Bangla To English & English to Bangla)
 
-Neural Machine Translation (NMT) is one of the most common type of machine translation method that relies upon neural network models to build statistical models with the end goal of translation. The essential advantage of NMT is that it gives a solitary system that can be prepared to unravel the source and target text.One of the most well recognized NMT library is Multilingual Unsupervised and Supervised Embeddings ([MUSE](https://github.com/facebookresearch/MUSE)).This python library is  for multilingual word embeddings, whose goal is to provide the community with:
+Neural machine translation (NMT) has recently become the dominant paradigm to machine translation (Bahdanau et al., 2014; Sutskever et al., 2014). As opposed to the traditional statistical machine translation (SMT), NMT systems are trained end-to-end, take advantage of continuous representations that greatly alleviate the sparsity problem, and make use of much larger contexts, thus mitigating the locality problem. The essential advantage of NMT is that it gives a solitary system that can be prepared to unravel the source and target text.One of the most well recognized NMT library is Multilingual Unsupervised and Supervised Embeddings. 
 
 * state-of-the-art multilingual word embeddings ([fastText](https://github.com/facebookresearch/fastText/tree/main/alignment) embeddings aligned in a common space)
 * large-scale high-quality bilingual dictionaries for training and evaluation
+* ([MUSE](https://github.com/facebookresearch/MUSE)).
 
 This approach includes both *supervised* method that uses a bilingual dictionary or identical character strings, and also *unsupervised* method that does not use any parallel data (see [Word Translation without Parallel Data](https://arxiv.org/pdf/1710.04087.pdf) for more details).
 
@@ -215,5 +216,11 @@ Suprervisor
 * A lot of issues were the specifications of available systems. The embeddings for the English vocabulary were extremely large and had to reduce down for training alongside Bangla words. We wrote some code for a specific amount of vocabulary. However, even that was not enough, Since the vocabulary was concise for Bangla. The problem was found while reading the whole file at once. It was too large for a small set of RAM to open and process it any further. We had to edit the original vocab files both for Bangla and English to address the memory error.
 
 * We had chosen around sample 5000 words based on frequency. However, most frequent English and Bangla words aren't similar at all. So we had to relocate some words and collect the most feasible ones. Training and evaluating took a very long time to finish. The work would have been better if we had unshackled access to a robust system for an extensive period of 2 weeks for training and testing with an extensive vocabulary and bigger vector space. Then, we could
+
+### References
+
+[1] Artetxe, M., Labaka, G., Agirre, E., & Cho, K. (2017). Unsupervised neural machine translation. arXiv preprint arXiv:1710.11041.
+[2] Lample, G., Conneau, A., Denoyer, L., & Ranzato, M. A. (2017). Unsupervised machine translation using monolingual corpora only. arXiv preprint arXiv:1711.00043.
+[3] Lian, X., Jain, K., Truszkowski, J., Poupart, P., & Yu, Y. (2020). Unsupervised Multilingual Alignment using Wasserstein Barycenter. arXiv preprint arXiv:2002.00743.
 
 ### For any furthur query please feel free to contact me [Md Sajid Ahmed](mailto:[sajid.ahmed1@northsouth.edu) 
