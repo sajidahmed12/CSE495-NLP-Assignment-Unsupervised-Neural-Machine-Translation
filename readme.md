@@ -22,7 +22,7 @@ This approach includes both *supervised* method that uses a bilingual dictionary
 ## Datasets
 
 To download monolingual and cross-lingual word embeddings evaluation datasets:
-* Our 110 [bilingual dictionaries](https://github.com/facebookresearch/MUSE#ground-truth-bilingual-dictionaries)
+* [bilingual dictionaries](https://github.com/facebookresearch/MUSE#ground-truth-bilingual-dictionaries)
 * 28 monolingual word similarity tasks for 6 languages, and the English word analogy task
 * Cross-lingual word similarity tasks from [SemEval2017](http://alt.qcri.org/semeval2017/task2/)
 * Sentence translation retrieval with [Europarl](http://www.statmt.org/europarl/) corpora
@@ -47,7 +47,7 @@ cd data/
 
 ## Methodology 
 
-The key idea is to create a common latent space between the two languages (or domains),in our case English and Bengali, and learn to translate by reconstructing in both domains
+The key idea is to create a common latent space between the two languages (or domains),in our case English and Bangla, and learn to translate by reconstructing in both domains
 
 Principles:
 
