@@ -137,8 +137,6 @@ Bengali: [full](https://dl.fbaipublicfiles.com/arrival/dictionaries/bn-en.txt) [
 * Download tgt.pickle from this [link](https://drive.google.com/file/d/1GuFLa9lAvzXxfpWkGspmxefQ_m544H5S/view) and place in the root directory. 
 * Download all.pickle from this [link](https://drive.google.com/file/d/1SVsgUKXeGf3gbZmhqFwM3_mLgH5MB0ec/view) and place in the root directory. 
 
-## Results
-
 ### Visualization of the multilingual word embedding space
 
 **Nearest Neighbors(NN)**
@@ -158,6 +156,8 @@ k = 5: 56.200000 <br />
 k = 10: 63.200000 <br />
 
 ![Similar word embeddings in same latent space for Bengali and English words](./docs/Word_Embeddings.PNG)
+
+## Results Outputs
 
 Text Pre-processing output
 <!-- To Resize need to use http link
